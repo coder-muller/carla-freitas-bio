@@ -31,7 +31,7 @@ export function Services() {
     ]
 
     return (
-        <section id="servicos" className="py-20 px-4 bg-background">
+        <section id="services" className="py-20 px-4 bg-background">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-light text-foreground mb-4 text-balance">Serviços Oferecidos</h2>

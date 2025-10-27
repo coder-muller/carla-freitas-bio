@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export function Hero() {
     return (
-        <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
+        <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 py-20">
             <div className="max-w-6xl mx-auto w-full">
                 <div className="flex flex-col items-center text-center space-y-8">
                     <div className="relative w-32 h-32 md:w-40 md:h-40">

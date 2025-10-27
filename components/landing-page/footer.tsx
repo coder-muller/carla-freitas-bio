@@ -2,7 +2,7 @@ import { Leaf } from "lucide-react"
 
 export function Footer() {
     return (
-        <footer className="py-12 px-4 bg-foreground text-background">
+        <footer id="footer" className="py-12 px-4 bg-foreground text-background">
             <div className="max-w-6xl mx-auto">
                 <div className="flex flex-col items-center text-center space-y-4">
                     <div className="flex items-center gap-2">

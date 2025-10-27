@@ -33,7 +33,7 @@ export function Contact() {
     }
 
     return (
-        <section id="contato" className="py-20 px-4 bg-card">
+        <section id="contact" className="py-20 px-4 bg-card">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-light text-foreground mb-4 text-balance">Vamos Conversar?</h2>
