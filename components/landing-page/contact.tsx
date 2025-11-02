@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail, Phone, MapPin, Instagram } from "lucide-react"
+import { Mail, Phone, Instagram } from "lucide-react"
 
 export function Contact() {
     const contacts = [

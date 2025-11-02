@@ -26,7 +26,7 @@ export function Hero() {
                     </div>
 
                     <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed text-pretty">
-                        Consultoria ambiental completa, com soluções técnicas e atendimento personalizado para garantir o sucesso e a regularidade do seu projeto.
+                        Suloções ambientais que unem desenvolvimento agilidade e responsabilidade com o meio ambiente.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">

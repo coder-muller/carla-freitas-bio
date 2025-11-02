@@ -7,7 +7,6 @@ import {
     FileSearch,
     Building2,
     Recycle,
-    Leaf,
     FileCheck,
     ShieldAlert,
     Trees,
@@ -79,13 +78,19 @@ export function Services() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {services.map((service, index) => (
-                        <Card key={index} className="border-border hover:border-primary/50 transition-colors">
-                            <CardHeader>
-                                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                                    <service.icon className="w-6 h-6 text-primary" />
+                        <Card 
+                            key={index} 
+                            className="group relative border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <CardHeader className="relative">
+                                <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                                    <service.icon className="w-7 h-7 text-primary transition-transform duration-300 group-hover:scale-110" />
                                 </div>
-                                <CardTitle className="text-foreground">{service.title}</CardTitle>
-                                <CardDescription className="text-muted-foreground leading-relaxed">
+                                <CardTitle className="text-foreground text-xl mb-3 group-hover:text-primary transition-colors duration-300">
+                                    {service.title}
+                                </CardTitle>
+                                <CardDescription className="text-muted-foreground leading-relaxed text-base">
                                     {service.description}
                                 </CardDescription>
                             </CardHeader>
