@@ -25,7 +25,7 @@ export function About() {
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-light text-foreground mb-4 text-balance">Sobre o Trabalho</h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty">
-                        Com formação sólida em Biologia e experiência em projetos ambientais, ofereço serviços especializados que
+                        Com formação sólida em Biologia e experiência em projetos ambientais desde 2004, ofereço serviços especializados que
                         aliam conhecimento científico e prática sustentável.
                     </p>
                 </div>

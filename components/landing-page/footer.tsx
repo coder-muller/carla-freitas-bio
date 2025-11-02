@@ -1,4 +1,5 @@
 import { Leaf } from "lucide-react"
+import { Badge } from "../ui/badge"
 
 export function Footer() {
     return (
@@ -9,6 +10,10 @@ export function Footer() {
                         <Leaf className="w-6 h-6 text-primary" />
                         <span className="text-lg font-medium">Carla Freitas</span>
                     </div>
+
+                    <Badge variant="default">
+                        CRBio 45378-03D
+                    </Badge>
 
                     <p className="text-sm text-background/70">Bióloga • Consultoria Ambiental • Sustentabilidade</p>
 
