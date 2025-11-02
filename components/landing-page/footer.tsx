@@ -16,6 +16,9 @@ export function Footer() {
                         <p className="text-xs text-background/60">
                             © {new Date().getFullYear()} Carla Freitas. Todos os direitos reservados.
                         </p>
+                        <p className="text-xs text-background/60 mt-2">
+                            Desenvolvido por <a href="https://www.instagram.com/coder.muller/" className="text-background/60 hover:text-background/80 transition-colors">Guilherme Müller</a>
+                        </p>
                     </div>
                 </div>
             </div>
