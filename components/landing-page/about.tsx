@@ -4,13 +4,13 @@ export function About() {
     const highlights = [
         {
             icon: Leaf,
-            title: "Sustentabilidade",
-            description: "Soluções ambientais baseadas em ciência e responsabilidade ecológica",
+            title: "Atuação Personalizada",
+            description: "Atendimento próximo e comprometido com as necessidades de cada cliente e projeto.",
         },
         {
             icon: Microscope,
-            title: "Pesquisa Aplicada",
-            description: "Estudos técnicos e análises detalhadas para tomada de decisão",
+            title: "Compromisso com o Resultado",
+            description: "Dedicação, ética e excelência em todas as etapas do trabalho ambiental.",
         },
         {
             icon: FileText,
