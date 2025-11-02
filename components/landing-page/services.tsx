@@ -1,32 +1,69 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { TreePine, ClipboardCheck, BookOpen, Users } from "lucide-react"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+    ClipboardCheck,
+    FileText,
+    Scissors,
+    Sprout,
+    FileSearch,
+    Building2,
+    Recycle,
+    Leaf,
+    FileCheck,
+    ShieldAlert,
+    Trees,
+} from "lucide-react"
 
 export function Services() {
     const services = [
         {
-            icon: TreePine,
-            title: "Estudos Ambientais",
-            description:
-                "Levantamentos de fauna e flora, estudos de impacto ambiental (EIA/RIMA) e relatórios técnicos especializados.",
-            items: ["EIA/RIMA", "Inventário de Biodiversidade", "Monitoramento Ambiental"],
-        },
-        {
             icon: ClipboardCheck,
             title: "Licenciamento Ambiental",
-            description: "Assessoria completa em processos de licenciamento junto aos órgãos ambientais competentes.",
-            items: ["Licença Prévia", "Licença de Instalação", "Licença de Operação"],
+            description: "Assessoria completa para obtenção de licenças ambientais junto aos órgãos competentes, garantindo que seu empreendimento atenda às exigências legais e minimize impactos ambientais.",
         },
         {
-            icon: BookOpen,
-            title: "Consultoria Técnica",
-            description: "Orientação especializada para empresas e projetos que necessitam de adequação ambiental.",
-            items: ["Planos de Manejo", "Gestão Ambiental", "Adequação Legal"],
+            icon: FileText,
+            title: "Laudo de Cobertura Vegetal",
+            description: "Elaboração de laudos técnicos detalhados sobre a composição e o estado da vegetação existente, indispensáveis para processos de licenciamento e intervenções em áreas com vegetação nativa.",
         },
         {
-            icon: Users,
-            title: "Educação Ambiental",
-            description: "Programas e treinamentos voltados para conscientização e capacitação ambiental.",
-            items: ["Palestras", "Workshops", "Treinamentos Corporativos"],
+            icon: Scissors,
+            title: "Projetos de Poda, Transplante, Extração de Árvores e Plantio Compensatório",
+            description: "Planejamento e execução de projetos voltados à poda, transplante ou remoção de árvores — incluindo espécies nativas e protegidas como figueiras, butiazeiros e corticeiras do banhado — conforme normas ambientais e municipais.",
+        },
+        {
+            icon: Sprout,
+            title: "Recuperação de Áreas Degradadas (PRAD)",
+            description: "Desenvolvimento e acompanhamento de Projetos de Recuperação de Áreas Degradadas, promovendo a restauração ecológica e o equilíbrio ambiental em áreas impactadas por atividades humanas.",
+        },
+        {
+            icon: FileSearch,
+            title: "Estudo de Impacto Ambiental (EIA/RIMA)",
+            description: "Realização de estudos técnicos que avaliam os impactos potenciais de empreendimentos no meio ambiente, com recomendações de medidas mitigadoras e compensatórias.",
+        },
+        {
+            icon: Building2,
+            title: "Licenciamento e Regularização de Loteamentos",
+            description: "Apoio técnico para a regularização ambiental de áreas urbanas e rurais, assegurando que os loteamentos estejam em conformidade com a legislação vigente.",
+        },
+        {
+            icon: Recycle,
+            title: "Plano de Gerenciamento de Resíduos (PGRS)",
+            description: "Elaboração de planos personalizados para o gerenciamento correto dos resíduos sólidos, visando reduzir impactos ambientais e atender às normas de sustentabilidade.",
+        },
+        {
+            icon: FileCheck,
+            title: "Cadastro Ambiental Rural (CAR)",
+            description: "Realização e atualização do Cadastro Ambiental Rural, com análises técnicas para adequação de propriedades rurais às normas do Código Florestal.",
+        },
+        {
+            icon: ShieldAlert,
+            title: "Defesa de Multas e Notificações Ambientais",
+            description: "Elaboração de defesas técnicas e recursos administrativos contra autos de infração, multas ou notificações ambientais, assegurando o direito de defesa e buscando soluções eficazes junto aos órgãos competentes.",
+        },
+        {
+            icon: Trees,
+            title: "Inventário Florestal e Arbóreo",
+            description: "Levantamento quantitativo e qualitativo da vegetação, identificando espécies, diâmetro, altura e estado fitossanitário.",
         },
     ]
 
@@ -40,7 +77,7 @@ export function Services() {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {services.map((service, index) => (
                         <Card key={index} className="border-border hover:border-primary/50 transition-colors">
                             <CardHeader>
@@ -52,16 +89,6 @@ export function Services() {
                                     {service.description}
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent>
-                                <ul className="space-y-2">
-                                    {service.items.map((item, idx) => (
-                                        <li key={idx} className="flex items-center text-sm text-muted-foreground">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-primary mr-3" />
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </CardContent>
                         </Card>
                     ))}
                 </div>
