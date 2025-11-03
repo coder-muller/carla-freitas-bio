@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export function Hero() {
     return (
@@ -28,21 +29,23 @@ export function Hero() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <Button
-                            size="lg"
-                            className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                            onClick={() => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" })}
-                        >
-                            Entre em Contato
-                        </Button>
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            className="border-primary text-primary hover:bg-primary/10 bg-transparent"
-                            onClick={() => document.getElementById("servicos")?.scrollIntoView({ behavior: "smooth" })}
-                        >
-                            Conheça os Serviços
-                        </Button>
+                        <Link href="#contact">
+                            <Button
+                                size="lg"
+                                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                            >
+                                Entre em Contato
+                            </Button>
+                        </Link>
+                        <Link href="#services">
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                className="border-primary text-primary hover:bg-primary/10 bg-transparent"
+                            >
+                                Conheça os Serviços
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>
