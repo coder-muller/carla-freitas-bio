@@ -1,0 +1,32 @@
+services:
+  carla-bio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: carla-bio
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3333
+    labels:
+      - traefik.enable=true
+
+      - traefik.http.routers.carla-bio-http.rule=Host(`dev.carlafreitas.bio`)
+      - traefik.http.routers.carla-bio-http.entrypoints=http
+      - traefik.http.routers.carla-bio-http.middlewares=https-redirect
+
+      - traefik.http.routers.carla-bio-https.rule=Host(`dev.carlafreitas.bio`)
+      - traefik.http.routers.carla-bio-https.entrypoints=https
+      - traefik.http.routers.carla-bio-https.tls=true
+      - traefik.http.routers.carla-bio-https.tls.certresolver=le
+      - traefik.http.routers.carla-bio-https.service=carla-bio-service
+
+      - traefik.http.services.carla-bio-service.loadbalancer.server.port=3333
+      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true
