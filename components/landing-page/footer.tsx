@@ -1,32 +1,38 @@
-import { Leaf } from "lucide-react"
-import { Badge } from "../ui/badge"
+import { Logo } from "@/components/logo";
 
 export function Footer() {
-    return (
-        <footer id="footer" className="py-12 px-4 bg-foreground text-background">
-            <div className="max-w-6xl mx-auto">
-                <div className="flex flex-col items-center text-center space-y-4">
-                    <div className="flex items-center gap-2">
-                        <Leaf className="w-6 h-6 text-primary" />
-                        <span className="text-lg font-medium">Carla Freitas</span>
-                    </div>
-
-                    <Badge variant="default">
-                        CRBio 45378-03D
-                    </Badge>
-
-                    <p className="text-sm text-background/70">Bióloga • Consultoria Ambiental • Sustentabilidade</p>
-
-                    <div className="pt-4 border-t border-background/20 w-full">
-                        <p className="text-xs text-background/60">
-                            © {new Date().getFullYear()} Carla Freitas. Todos os direitos reservados.
-                        </p>
-                        <p className="text-xs text-background/60 mt-2">
-                            Desenvolvido por <a href="https://www.instagram.com/coder.muller/" className="text-background/60 hover:text-background/80 transition-colors">Guilherme Müller</a>
-                        </p>
-                    </div>
-                </div>
+  return (
+    <footer id="footer" className="px-4 pb-10 pt-6 md:pb-12">
+      <div className="section-shell">
+        <div className="grain-mask overflow-hidden rounded-[1.9rem] border border-primary/15 bg-foreground px-6 py-8 text-background shadow-xl shadow-black/20 md:px-10 md:py-10">
+          <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+            <div className="flex items-center gap-3">
+              <span className="grid size-11 place-items-center rounded-full bg-primary/20 text-primary">
+                <Logo size={18} />
+              </span>
+              <div>
+                <p className="text-lg">Carla Freitas</p>
+                <p className="text-sm text-background/70">Bióloga • Consultoria Ambiental</p>
+              </div>
             </div>
-        </footer>
-    )
+
+            <div className="rounded-full border border-background/25 px-4 py-2 text-sm text-background/90">CRBio 45378-03D</div>
+
+            <a
+              href="https://www.instagram.com/coder.muller/"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-background/20 px-4 py-2 text-sm text-background/75 transition-colors hover:text-background"
+            >
+              Desenvolvido por Guilherme Müller
+            </a>
+          </div>
+
+          <div className="mt-7 border-t border-background/20 pt-5 text-center text-xs text-background/60 md:text-left">
+            © {new Date().getFullYear()} Carla Freitas. Todos os direitos reservados.
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }
