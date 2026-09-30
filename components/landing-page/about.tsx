@@ -63,7 +63,7 @@ export function About() {
                 key={title}
                 className="group grid grid-cols-[auto_1fr] gap-5 border-t border-foreground/10 py-8 first:border-t-0 first:pt-0 md:gap-7"
               >
-                <span className="grid size-14 place-items-center rounded-full border border-primary/20 text-primary transition-[background-color,color,transform] duration-500 ease-(--ease-out) group-hover:-rotate-12 group-hover:bg-primary group-hover:text-primary-foreground">
+                <span className="grid size-14 place-items-center rounded-full border border-primary/20 text-primary transition-[background-color,color,translate,scale,rotate] duration-500 ease-(--ease-out) group-hover:-rotate-12 group-hover:bg-primary group-hover:text-primary-foreground">
                   <Icon className="size-5" strokeWidth={1.5} />
                 </span>
                 <div>

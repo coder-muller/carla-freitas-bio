@@ -58,7 +58,7 @@ export function Hero() {
           <Magnetic className="w-full sm:w-auto">
             <a
               href="#contact"
-              className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-full bg-primary pr-2 pl-7 text-base font-medium text-primary-foreground shadow-[0_18px_40px_-18px_oklch(0.43_0.075_160/0.7)] transition-[transform,background-color] duration-200 ease-(--ease-out) hover:bg-foreground active:scale-[0.97] sm:w-auto"
+              className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-full bg-primary pr-2 pl-7 text-base font-medium text-primary-foreground shadow-[0_18px_40px_-18px_oklch(0.43_0.075_160/0.7)] transition-[translate,scale,rotate,background-color] duration-200 ease-(--ease-out) hover:bg-foreground active:scale-[0.97] sm:w-auto"
             >
               {PRIMARY_CTA}
               <span className="grid size-10 place-items-center overflow-hidden rounded-full bg-primary-foreground/12">

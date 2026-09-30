@@ -104,7 +104,7 @@ export function Header() {
           <div className="flex items-center gap-2">
             <a
               href="#contact"
-              className="hidden h-12 items-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground transition-[transform,background-color] duration-200 ease-(--ease-out) hover:bg-foreground active:scale-[0.97] md:inline-flex"
+              className="hidden h-12 items-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground transition-[translate,scale,rotate,background-color] duration-200 ease-(--ease-out) hover:bg-foreground active:scale-[0.97] md:inline-flex"
             >
               {PRIMARY_CTA}
             </a>
@@ -117,7 +117,7 @@ export function Header() {
               aria-controls="mobile-menu"
               onClick={() => setOpen((value) => !value)}
               className={cn(
-                "relative grid size-12 place-items-center rounded-full transition-[transform,background-color] duration-200 ease-(--ease-out) active:scale-[0.94] md:hidden",
+                "relative grid size-12 place-items-center rounded-full transition-[translate,scale,rotate,background-color] duration-200 ease-(--ease-out) active:scale-[0.94] md:hidden",
                 open ? "bg-forest-foreground/10" : "bg-foreground/6",
               )}
             >

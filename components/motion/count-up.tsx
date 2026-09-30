@@ -35,7 +35,7 @@ export function CountUp({ to, from = 0, duration = 2, className }: CountUpProps)
   }, [inView, reduce, from, to, duration]);
 
   return (
-    <span ref={ref} className={className} style={{ fontVariantNumeric: "tabular-nums" }}>
+    <span ref={ref} className={className}>
       {to}
     </span>
   );
