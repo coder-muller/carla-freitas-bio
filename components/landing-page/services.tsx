@@ -148,7 +148,7 @@ export function Services() {
           </p>
           <a
             href="#contact"
-            className="group inline-flex h-14 items-center gap-3 rounded-full border border-foreground/15 px-7 text-base font-medium transition-[background-color,color,border-color,translate,scale,rotate] duration-300 ease-(--ease-out) hover:border-transparent hover:bg-foreground hover:text-background active:scale-[0.97]"
+            className="group inline-flex h-14 items-center gap-3 rounded-full border border-foreground/15 px-7 text-base font-medium transition-[background-color,color,border-color,translate,scale,rotate] duration-300 ease-(--ease-out) hover:border-transparent hover:bg-foreground hover:text-background active:scale-[0.96]"
           >
             {PRIMARY_CTA}
             <ArrowUpRight

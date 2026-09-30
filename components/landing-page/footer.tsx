@@ -42,12 +42,12 @@ export function Footer() {
 
             <nav aria-label="Rodapé" className="md:col-span-3 md:col-start-7">
               <p className="font-mono text-[0.7rem] tracking-[0.18em] text-forest-foreground/55 uppercase">Navegação</p>
-              <ul className="mt-5 space-y-1">
+              <ul className="mt-3">
                 {NAV_ITEMS.map((item) => (
                   <li key={item.href}>
                     <a
                       href={item.href}
-                      className="inline-block py-1.5 text-base text-forest-foreground/85 transition-colors duration-200 hover:text-accent"
+                      className="inline-block py-2.5 text-base text-forest-foreground/85 transition-colors duration-200 hover:text-accent"
                     >
                       {item.name}
                     </a>
@@ -58,14 +58,14 @@ export function Footer() {
 
             <div className="md:col-span-3">
               <p className="font-mono text-[0.7rem] tracking-[0.18em] text-forest-foreground/55 uppercase">Contato</p>
-              <ul className="mt-5 space-y-1">
+              <ul className="mt-3">
                 <li>
-                  <a href={`mailto:${CONTACT.email}`} className="inline-block py-1.5 break-all text-forest-foreground/85 transition-colors duration-200 hover:text-accent">
+                  <a href={`mailto:${CONTACT.email}`} className="inline-block py-2.5 break-all text-forest-foreground/85 transition-colors duration-200 hover:text-accent">
                     {CONTACT.email}
                   </a>
                 </li>
                 <li>
-                  <a href={CONTACT.phoneHref} className="inline-block py-1.5 text-forest-foreground/85 transition-colors duration-200 hover:text-accent">
+                  <a href={CONTACT.phoneHref} className="inline-block py-2.5 text-forest-foreground/85 transition-colors duration-200 hover:text-accent">
                     {CONTACT.phone}
                   </a>
                 </li>
@@ -74,7 +74,7 @@ export function Footer() {
                     href={CONTACT.instagramHref}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-block py-1.5 text-forest-foreground/85 transition-colors duration-200 hover:text-accent"
+                    className="inline-block py-2.5 text-forest-foreground/85 transition-colors duration-200 hover:text-accent"
                   >
                     {CONTACT.instagram}
                   </a>
@@ -99,7 +99,7 @@ export function Footer() {
               <a
                 href="#hero"
                 aria-label="Voltar ao topo"
-                className="group grid size-11 place-items-center rounded-full border border-forest-foreground/15 text-forest-foreground transition-[background-color,color,scale] duration-200 ease-(--ease-out) hover:bg-forest-foreground hover:text-forest active:scale-[0.94]"
+                className="group grid size-11 place-items-center rounded-full border border-forest-foreground/15 text-forest-foreground transition-[background-color,color,scale] duration-200 ease-(--ease-out) hover:bg-forest-foreground hover:text-forest active:scale-[0.96]"
               >
                 <ArrowUp
                   className="size-4 transition-transform duration-300 ease-(--ease-out) group-hover:-translate-y-0.5"

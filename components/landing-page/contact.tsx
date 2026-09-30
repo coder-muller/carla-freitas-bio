@@ -36,14 +36,14 @@ function CopyButton({ value, label }: { value: string; label: string }) {
       type="button"
       onClick={handleCopy}
       aria-label={copied ? `${label} copiado` : `Copiar ${label.toLowerCase()}`}
-      className="relative z-10 grid size-12 shrink-0 place-items-center rounded-full border border-foreground/12 bg-background text-foreground transition-[scale,background-color,color] duration-150 ease-(--ease-out) hover:bg-foreground hover:text-background active:scale-[0.94]"
+      className="relative z-10 grid size-12 shrink-0 place-items-center rounded-full border border-foreground/12 bg-background text-foreground transition-[scale,background-color,color] duration-150 ease-(--ease-out) hover:bg-foreground hover:text-background active:scale-[0.96]"
     >
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={copied ? "check" : "copy"}
-          initial={{ opacity: 0, scale: 0.6, filter: "blur(4px)" }}
+          initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, scale: 0.6, filter: "blur(4px)" }}
+          exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
         >
           {copied ? <Check className="size-4" strokeWidth={2} /> : <Copy className="size-4" strokeWidth={1.5} />}
