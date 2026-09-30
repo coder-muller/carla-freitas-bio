@@ -6,13 +6,14 @@ import { useRef } from "react";
 
 import { Logo } from "@/components/logo";
 import { CONTACT, NAV_ITEMS } from "@/lib/content";
+import { mapRange } from "@/lib/utils";
 
 export function Footer() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["45%", "0%"]);
-  const leafRotate = useTransform(scrollYProgress, [0, 1], [-40, 0]);
+  const y = useTransform(scrollYProgress, (value) => `${mapRange(value, [0, 1], [45, 0])}%`);
+  const leafRotate = useTransform(scrollYProgress, (value) => mapRange(value, [0, 1], [-40, 0]));
 
   return (
     <footer ref={ref} id="footer" className="px-3 pb-3 md:px-5 md:pb-5">

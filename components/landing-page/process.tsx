@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
+import { motion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
 
 import { Reveal } from "@/components/motion/reveal";
+import { mapRange } from "@/lib/utils";
 
 const STEPS = [
   {
@@ -21,8 +22,8 @@ const STEPS = [
 ];
 
 function Node({ progress, at }: { progress: MotionValue<number>; at: number }) {
-  const scale = useTransform(progress, [at - 0.08, at], [0.4, 1]);
-  const opacity = useTransform(progress, [at - 0.08, at], [0, 1]);
+  const scale = useTransform(progress, (value) => mapRange(value, [at - 0.08, at], [0.4, 1]));
+  const opacity = useTransform(progress, (value) => mapRange(value, [at - 0.08, at], [0, 1]));
 
   return (
     <span className="relative grid size-4 place-items-center rounded-full border border-foreground/20 bg-background">
@@ -33,10 +34,8 @@ function Node({ progress, at }: { progress: MotionValue<number>; at: number }) {
 
 export function Process() {
   const ref = useRef<HTMLOListElement>(null);
-  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.55"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
-  const line = reduce ? scrollYProgress : progress;
+  const line = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   return (
     <section aria-labelledby="process-title" className="py-24 md:py-32">

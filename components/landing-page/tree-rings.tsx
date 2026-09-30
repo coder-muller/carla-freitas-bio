@@ -13,7 +13,7 @@ import { useEffect, useMemo } from "react";
 
 import { Logo } from "@/components/logo";
 import { CONTACT } from "@/lib/content";
-import { cn } from "@/lib/utils";
+import { cn, mapRange } from "@/lib/utils";
 
 const SIZE = 600;
 const CENTER = SIZE / 2;
@@ -148,9 +148,9 @@ export function TreeRings({ years, className }: { years: number; className?: str
   const px = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
   const py = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
   const { scrollY } = useScroll();
-  const scale = useTransform(scrollY, [0, 900], [1, 1.14]);
-  const rotate = useTransform(scrollY, [0, 900], [0, -8]);
-  const opacity = useTransform(scrollY, [0, 700], [1, 0.25]);
+  const scale = useTransform(scrollY, (value) => mapRange(value, [0, 900], [1, 1.14]));
+  const rotate = useTransform(scrollY, (value) => mapRange(value, [0, 900], [0, -8]));
+  const opacity = useTransform(scrollY, (value) => mapRange(value, [0, 700], [1, 0.25]));
 
   useEffect(() => {
     if (reduce || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;

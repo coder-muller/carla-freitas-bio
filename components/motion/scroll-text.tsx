@@ -3,7 +3,7 @@
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn, mapRange } from "@/lib/utils";
 
 interface WordProps {
   children: string;
@@ -13,7 +13,8 @@ interface WordProps {
 }
 
 function Word({ children, progress, range, emphasis }: WordProps) {
-  const opacity = useTransform(progress, range, [0.14, 1]);
+  // Function transforms keep Motion from hoisting this onto a page-wide native ScrollTimeline.
+  const opacity = useTransform(progress, (value) => mapRange(value, range, [0.14, 1]));
 
   return (
     <motion.span style={{ opacity }} className={cn(emphasis && "text-primary italic")}>
@@ -42,7 +43,7 @@ interface ScrollTextProps {
 export function ScrollText({ text, className }: ScrollTextProps) {
   const ref = useRef<HTMLParagraphElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.5"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.9", "end 0.72"] });
 
   const words = parseWords(text);
 
@@ -61,10 +62,12 @@ export function ScrollText({ text, className }: ScrollTextProps) {
   return (
     <p ref={ref} className={className}>
       {words.map((word, index) => {
-        const start = index / words.length;
+        // Each word fades over a short overlapping window; the last one lands exactly at 1.
+        const span = Math.min(0.25, 4 / words.length);
+        const start = (index / (words.length - 1)) * (1 - span);
         return (
           <span key={index}>
-            <Word progress={scrollYProgress} range={[start, start + 1 / words.length]} emphasis={word.emphasis}>
+            <Word progress={scrollYProgress} range={[start, start + span]} emphasis={word.emphasis}>
               {word.text}
             </Word>{" "}
           </span>
