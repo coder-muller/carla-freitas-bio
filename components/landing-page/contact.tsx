@@ -1,97 +1,106 @@
-import { Instagram, Mail, Phone, Send } from "lucide-react";
+"use client";
 
-import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "motion/react";
+import { ArrowUpRight, Check, Copy } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const contacts = [
-  {
-    icon: Mail,
-    title: "Email",
-    info: "carla.bio_sls@yahoo.com",
-    href: "mailto:carla.bio_sls@yahoo.com",
-  },
-  {
-    icon: Phone,
-    title: "Telefone",
-    info: "(53) 99929-7361",
-    href: "tel:+5553999297361",
-  },
-  {
-    icon: Instagram,
-    title: "Instagram",
-    info: "@carla.sfreitas_26",
-    href: "https://www.instagram.com/carla.sfreitas_26/",
-  },
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { CONTACT } from "@/lib/content";
+
+const CHANNELS = [
+  { label: "Email", value: CONTACT.email, href: `mailto:${CONTACT.email}`, copy: CONTACT.email },
+  { label: "Telefone", value: CONTACT.phone, href: CONTACT.phoneHref, copy: CONTACT.phone },
+  { label: "Instagram", value: CONTACT.instagram, href: CONTACT.instagramHref, external: true },
 ];
 
-const steps = [
-  "Você envia as informações do seu projeto.",
-  "Recebe orientação técnica inicial e próximos passos.",
-  "Formalizamos proposta personalizada para execução.",
-];
+function CopyButton({ value, label }: { value: string; label: string }) {
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (!copied) return;
+    const timeout = window.setTimeout(() => setCopied(false), 1800);
+    return () => window.clearTimeout(timeout);
+  }, [copied]);
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      aria-label={copied ? `${label} copiado` : `Copiar ${label.toLowerCase()}`}
+      className="relative z-10 grid size-12 shrink-0 place-items-center rounded-full border border-foreground/12 bg-background text-foreground transition-[scale,background-color,color] duration-150 ease-(--ease-out) hover:bg-foreground hover:text-background active:scale-[0.94]"
+    >
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={copied ? "check" : "copy"}
+          initial={{ opacity: 0, scale: 0.6, filter: "blur(4px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, scale: 0.6, filter: "blur(4px)" }}
+          transition={{ type: "spring", duration: 0.3, bounce: 0 }}
+        >
+          {copied ? <Check className="size-4" strokeWidth={2} /> : <Copy className="size-4" strokeWidth={1.5} />}
+        </motion.span>
+      </AnimatePresence>
+      <span aria-live="polite" className="sr-only">
+        {copied ? "Copiado" : ""}
+      </span>
+    </button>
+  );
+}
 
 export function Contact() {
   return (
-    <section id="contact" className="px-4 py-18 md:py-24">
-      <div className="section-shell">
-        <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <article className="reveal-fade rounded-4xl border border-primary/20 bg-primary p-7 text-primary-foreground shadow-xl shadow-primary/20 md:p-10">
-            <p className="text-sm tracking-[0.2em] text-primary-foreground/70 uppercase">Contato direto</p>
-            <h2 className="mt-3 max-w-[16ch] text-3xl leading-tight text-balance md:text-5xl">Pronta para conduzir seu projeto com segurança técnica.</h2>
-            <p className="mt-5 max-w-[48ch] text-base leading-relaxed text-primary-foreground/80 md:text-lg">
-              Entre em contato para alinhar escopo, riscos e documentação necessária. O retorno acontece em até 24 horas úteis.
-            </p>
+    <section id="contact" aria-labelledby="contact-title" className="py-24 md:py-36">
+      <div className="section-shell grid gap-14 lg:grid-cols-12 lg:gap-12">
+        <Reveal className="lg:col-span-5">
+          <h2 id="contact-title" className="pb-2 text-[3.4rem] leading-[1.02] tracking-[-0.02em] md:text-7xl lg:text-[5.2rem]">
+            Vamos falar do seu <em className="text-primary">projeto?</em>
+          </h2>
+          <p className="mt-6 max-w-[38ch] text-lg leading-relaxed text-muted-foreground">
+            Atendo empresas, produtores rurais e empreendimentos urbanos. O retorno acontece em até 24 horas úteis.
+          </p>
+        </Reveal>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="h-12 rounded-full bg-white text-primary hover:bg-white/90">
-                <a href="mailto:carla.bio_sls@yahoo.com">
-                  <Send className="size-4" />
-                  Enviar email
+        <RevealGroup as="ul" className="lg:col-span-7 lg:self-end" stagger={0.08}>
+          {CHANNELS.map((channel) => (
+            <RevealItem as="li" key={channel.label} className="border-t border-foreground/10 last:border-b">
+              <div className="group relative flex items-center gap-4 py-6 md:py-8">
+                <a
+                  href={channel.href}
+                  target={channel.external ? "_blank" : undefined}
+                  rel={channel.external ? "noreferrer" : undefined}
+                  className="flex min-w-0 flex-1 items-center gap-4 after:absolute after:inset-0 focus-visible:outline-none after:focus-visible:rounded-xl after:focus-visible:outline-2 after:focus-visible:outline-ring"
+                >
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-mono text-[0.7rem] tracking-[0.18em] text-muted-foreground uppercase">
+                      {channel.label}
+                    </span>
+                    <span className="mt-2 block truncate font-serif text-[1.6rem] leading-tight text-foreground transition-[translate,color] duration-500 ease-(--ease-out) group-hover:translate-x-2 group-hover:text-primary sm:text-4xl md:text-[2.75rem]">
+                      {channel.value}
+                    </span>
+                  </span>
                 </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 rounded-full border-white/35 bg-transparent text-white hover:bg-white/12"
-              >
-                <a href="tel:+5553999297361">Ligar agora</a>
-              </Button>
-            </div>
 
-            <div className="mt-7 space-y-3 text-sm text-primary-foreground/85">
-              {steps.map((step, index) => (
-                <p key={step} className="flex items-start gap-3 rounded-2xl border border-white/18 bg-white/10 px-4 py-3">
-                  <span className="font-semibold text-white">{index + 1}.</span>
-                  <span>{step}</span>
-                </p>
-              ))}
-            </div>
-          </article>
+                {channel.copy && <CopyButton value={channel.copy} label={channel.label} />}
 
-          <div className="space-y-4">
-            {contacts.map(({ icon: Icon, title, info, href }) => (
-              <a
-                key={title}
-                href={href}
-                target={title === "Instagram" ? "_blank" : undefined}
-                rel={title === "Instagram" ? "noreferrer" : undefined}
-                className="reveal-fade group flex items-center gap-4 rounded-[1.4rem] border border-border/70 bg-card/85 p-5 shadow-lg shadow-black/5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 md:p-6"
-              >
-                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-primary/12">
-                  <Icon className="size-6 text-primary" />
+                <span
+                  aria-hidden="true"
+                  className="grid size-12 shrink-0 place-items-center rounded-full bg-primary max-sm:hidden text-primary-foreground transition-[rotate,scale] duration-500 ease-(--ease-out) group-hover:rotate-45"
+                >
+                  <ArrowUpRight className="size-5" strokeWidth={1.5} />
                 </span>
-                <div>
-                  <p className="text-sm font-semibold tracking-[0.15em] text-primary/75 uppercase">{title}</p>
-                  <p className="mt-1 text-base text-foreground group-hover:text-primary">{info}</p>
-                </div>
-              </a>
-            ))}
-
-            <article className="reveal-fade rounded-[1.4rem] border border-border/70 bg-card/85 p-6 text-sm leading-relaxed text-muted-foreground shadow-lg shadow-black/5">
-              Atendimento para empresas, produtores rurais e empreendimentos urbanos que precisam de regularização e estratégia ambiental.
-            </article>
-          </div>
-        </div>
+              </div>
+            </RevealItem>
+          ))}
+        </RevealGroup>
       </div>
     </section>
   );
