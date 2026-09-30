@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Magnetic } from "@/components/motion/magnetic";
 import { TreeRings } from "@/components/landing-page/tree-rings";
-import { PRIMARY_CTA } from "@/lib/content";
+import { PRIMARY_CTA, yearsOfExperience } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const HEADLINE = [
@@ -17,7 +17,7 @@ const HEADLINE = [
 export function Hero() {
   return (
     <section id="hero" className="relative isolate flex min-h-[100dvh] items-end overflow-clip pt-28 pb-14 md:items-center md:pb-20">
-      <TreeRings className="absolute -top-[4.5rem] -right-[39vw] -z-10 aspect-square w-[118vw] opacity-70 sm:-top-16 sm:-right-[22vw] sm:w-[88vw] md:top-1/2 md:-right-[12vw] md:w-[70vw] md:-translate-y-1/2 md:opacity-100 lg:right-[-6vw] lg:w-[min(56vw,50rem)]" />
+      <TreeRings years={yearsOfExperience()} className="absolute -top-[4.5rem] -right-[39vw] -z-10 aspect-square w-[118vw] opacity-70 sm:-top-16 sm:-right-[22vw] sm:w-[88vw] md:top-1/2 md:-right-[12vw] md:w-[70vw] md:-translate-y-1/2 md:opacity-100 lg:right-[-6vw] lg:w-[min(56vw,50rem)]" />
 
       <div className="section-shell">
         <p

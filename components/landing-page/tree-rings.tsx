@@ -9,7 +9,7 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { Logo } from "@/components/logo";
 import { CONTACT } from "@/lib/content";
@@ -19,7 +19,6 @@ const SIZE = 600;
 const CENTER = SIZE / 2;
 const POINTS = 72;
 const CORE_ANGLE = -0.42;
-const YEARS = new Date().getFullYear() - CONTACT.since;
 
 /** Small seeded PRNG so server and client draw the exact same rings. */
 function mulberry32(seed: number) {
@@ -94,9 +93,6 @@ function buildRings(count: number): Ring[] {
   return rings;
 }
 
-const RINGS = buildRings(YEARS);
-const OUTER = RINGS[RINGS.length - 1].tick;
-const INNER = RINGS[0].tick;
 
 interface RingLayerProps {
   ring: Ring;
@@ -144,7 +140,10 @@ function RingLayer({ ring, index, px, py }: RingLayerProps) {
   );
 }
 
-export function TreeRings({ className }: { className?: string }) {
+export function TreeRings({ years, className }: { years: number; className?: string }) {
+  const rings = useMemo(() => buildRings(years), [years]);
+  const INNER = rings[0].tick;
+  const OUTER = rings[rings.length - 1].tick;
   const reduce = useReducedMotion();
   const px = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
   const py = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
@@ -192,7 +191,7 @@ export function TreeRings({ className }: { className?: string }) {
           />
         </g>
 
-        {RINGS.map((ring, index) => (
+        {rings.map((ring, index) => (
           <RingLayer key={index} ring={ring} index={index} px={px} py={py} />
         ))}
 

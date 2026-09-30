@@ -22,6 +22,10 @@ export const CONTACT = {
   since: 2004,
 };
 
+export function yearsOfExperience() {
+  return new Date().getFullYear() - CONTACT.since;
+}
+
 export const PRIMARY_CTA = "Solicitar avaliação";
 
 export const NAV_ITEMS = [

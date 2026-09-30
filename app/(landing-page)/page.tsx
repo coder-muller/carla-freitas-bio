@@ -8,6 +8,9 @@ import { Process } from "@/components/landing-page/process";
 import { Services } from "@/components/landing-page/services";
 import { MotionProvider } from "@/components/motion/motion-provider";
 
+// Rebuild daily so the years of experience stay current.
+export const revalidate = 86400;
+
 export default function Home() {
   return (
     <MotionProvider>

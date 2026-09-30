@@ -3,7 +3,7 @@ import { FileText, Leaf, Microscope } from "lucide-react";
 import { CountUp } from "@/components/motion/count-up";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { ScrollText } from "@/components/motion/scroll-text";
-import { CONTACT, SERVICES } from "@/lib/content";
+import { CONTACT, SERVICES, yearsOfExperience } from "@/lib/content";
 
 const PRINCIPLES = [
   {
@@ -23,8 +23,6 @@ const PRINCIPLES = [
   },
 ];
 
-const YEARS = new Date().getFullYear() - CONTACT.since;
-
 export function About() {
   return (
     <section id="about" aria-labelledby="about-title" className="py-28 md:py-40">
@@ -42,7 +40,7 @@ export function About() {
           <div className="md:col-span-5">
             <Reveal>
               <p className="flex items-start font-serif leading-[0.8] text-primary">
-                <CountUp to={YEARS} from={0} duration={2.4} className="text-[8.5rem] md:text-[11rem]" />
+                <CountUp to={yearsOfExperience()} from={0} duration={2.4} className="text-[8.5rem] md:text-[11rem]" />
                 <span className="mt-4 text-5xl italic md:mt-6 md:text-6xl">anos</span>
               </p>
               <p className="mt-4 max-w-[28ch] text-base leading-relaxed text-muted-foreground">

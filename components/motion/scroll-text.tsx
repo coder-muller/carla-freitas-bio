@@ -22,6 +22,16 @@ function Word({ children, progress, range, emphasis }: WordProps) {
   );
 }
 
+function parseWords(text: string) {
+  let emphasis = false;
+  return text.split(" ").map((raw) => {
+    if (raw.startsWith("*")) emphasis = true;
+    const word = { text: raw.replaceAll("*", ""), emphasis };
+    if (/\*[.,]?$/.test(raw)) emphasis = false;
+    return word;
+  });
+}
+
 interface ScrollTextProps {
   /** Wrap words in *asterisks* to emphasize them. */
   text: string;
@@ -34,15 +44,7 @@ export function ScrollText({ text, className }: ScrollTextProps) {
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.5"] });
 
-  let emphasis = false;
-  const words = text.split(" ").map((raw) => {
-    const starts = raw.startsWith("*");
-    const ends = raw.endsWith("*") || raw.endsWith("*.") || raw.endsWith("*,");
-    if (starts) emphasis = true;
-    const word = { text: raw.replaceAll("*", ""), emphasis };
-    if (ends) emphasis = false;
-    return word;
-  });
+  const words = parseWords(text);
 
   if (reduce) {
     return (
