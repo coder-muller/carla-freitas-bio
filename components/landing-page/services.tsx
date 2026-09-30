@@ -1,110 +1,162 @@
-import {
-  Building2,
-  ClipboardCheck,
-  FileCheck,
-  FileSearch,
-  FileText,
-  Recycle,
-  Scissors,
-  ShieldAlert,
-  Sprout,
-  Trees,
-} from "lucide-react";
+"use client";
 
-const services = [
-  {
-    icon: ClipboardCheck,
-    title: "Licenciamento Ambiental",
-    description:
-      "Assessoria completa para obtenção de licenças, com orientação técnica e alinhamento às exigências legais.",
-  },
-  {
-    icon: FileText,
-    title: "Laudo de Cobertura Vegetal",
-    description:
-      "Laudos técnicos sobre composição e estado da vegetação para processos de licenciamento e intervenções.",
-  },
-  {
-    icon: Scissors,
-    title: "Projetos de Poda, Transplante, Extração de Árvores e Plantio Compensatório",
-    description:
-      "Planejamento e acompanhamento técnico de manejo arbóreo conforme normas ambientais e municipais.",
-  },
-  {
-    icon: Sprout,
-    title: "Recuperação de Áreas Degradadas (PRAD)",
-    description:
-      "Desenvolvimento de projetos para restauração ecológica e recuperação de áreas impactadas.",
-  },
-  {
-    icon: FileSearch,
-    title: "Estudo de Impacto Ambiental (EIA/RIMA)",
-    description:
-      "Estudos técnicos com avaliação de impactos, medidas mitigadoras e estratégias compensatórias.",
-  },
-  {
-    icon: Building2,
-    title: "Licenciamento e Regularização de Loteamentos",
-    description:
-      "Suporte técnico para regularização ambiental de áreas urbanas e rurais conforme legislação vigente.",
-  },
-  {
-    icon: Recycle,
-    title: "Plano de Gerenciamento de Resíduos (PGRS)",
-    description:
-      "Planos personalizados para gerenciamento correto de resíduos com foco em sustentabilidade e conformidade.",
-  },
-  {
-    icon: FileCheck,
-    title: "Cadastro Ambiental Rural (CAR)",
-    description:
-      "Cadastro e atualização de propriedades rurais com análise técnica alinhada ao Código Florestal.",
-  },
-  {
-    icon: ShieldAlert,
-    title: "Defesa de Multas e Notificações Ambientais",
-    description:
-      "Defesas técnicas e recursos administrativos para autos de infração, multas e notificações.",
-  },
-  {
-    icon: Trees,
-    title: "Inventário Florestal e Arbóreo",
-    description:
-      "Levantamento quantitativo e qualitativo da vegetação com identificação de espécies e estado fitossanitário.",
-  },
-];
+import { AnimatePresence, motion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+
+import { Reveal } from "@/components/motion/reveal";
+import { PRIMARY_CTA, SERVICES } from "@/lib/content";
+import { cn } from "@/lib/utils";
+
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
 export function Services() {
+  const [active, setActive] = useState(0);
+  const listRef = useRef<HTMLOListElement>(null);
+
+  // The row crossing the middle of the viewport becomes the active one.
+  useEffect(() => {
+    const rows = listRef.current?.querySelectorAll<HTMLLIElement>("[data-index]");
+    if (!rows) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(Number((entry.target as HTMLElement).dataset.index));
+        }
+      },
+      { rootMargin: "-48% 0px -48% 0px" },
+    );
+
+    rows.forEach((row) => observer.observe(row));
+    return () => observer.disconnect();
+  }, []);
+
+  const service = SERVICES[active];
+  const Icon = service.icon;
+
   return (
-    <section id="services" className="px-4 py-18 md:py-24">
+    <section id="services" aria-labelledby="services-title" className="py-24 md:py-36">
       <div className="section-shell">
-        <div className="mb-10 flex flex-col gap-4 md:mb-14 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-sm tracking-[0.2em] text-primary uppercase">Serviços</p>
-            <h2 className="mt-3 max-w-[20ch] text-3xl leading-tight text-balance md:text-5xl">Consultoria ambiental para decisões complexas.</h2>
+        <Reveal>
+          <p className="flex items-center gap-3 font-mono text-[0.72rem] tracking-[0.18em] text-muted-foreground uppercase">
+            <span aria-hidden="true" className="h-px w-8 bg-current" />
+            Serviços
+          </p>
+          <h2
+            id="services-title"
+            className="mt-6 max-w-[16ch] pb-1 text-5xl leading-[1.08] tracking-[-0.015em] md:text-7xl"
+          >
+            Do diagnóstico à <em className="text-primary">licença aprovada.</em>
+          </h2>
+        </Reveal>
+
+        <div className="mt-16 grid gap-10 md:mt-24 lg:grid-cols-12 lg:gap-12">
+          <div aria-hidden="true" className="hidden lg:col-span-5 lg:block">
+            <div className="sticky top-28 flex h-[min(38rem,calc(100dvh-9rem))] flex-col overflow-hidden rounded-[2rem] bg-forest p-10 text-forest-foreground">
+              <div
+                className="pointer-events-none absolute inset-0 opacity-70"
+                style={{
+                  backgroundImage:
+                    "repeating-radial-gradient(circle at 110% 110%, transparent 0 26px, oklch(1 0 0 / 0.045) 26px 27px)",
+                }}
+              />
+
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.div
+                  key={active}
+                  className="relative flex h-full flex-col"
+                  initial={{ opacity: 0, filter: "blur(8px)", transform: "translateY(16px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)", transform: "translateY(0px)" }}
+                  exit={{ opacity: 0, filter: "blur(8px)", transform: "translateY(-10px)" }}
+                  transition={{ duration: 0.45, ease: EASE_OUT }}
+                >
+                  <p className="font-mono text-[0.7rem] tracking-[0.18em] text-forest-foreground/60 uppercase">
+                    {service.category}
+                  </p>
+
+                  <span className="mt-auto grid size-20 place-items-center rounded-full bg-accent text-accent-foreground">
+                    <Icon className="size-8" strokeWidth={1.4} />
+                  </span>
+
+                  <h3 className="mt-8 text-[2.6rem] leading-[1.05] text-balance">{service.title}</h3>
+                  <p className="mt-4 max-w-[40ch] text-base leading-relaxed text-forest-foreground/75">
+                    {service.description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
+
+          <ol ref={listRef} className="lg:col-span-7">
+            {SERVICES.map((item, index) => {
+              const isActive = index === active;
+              const ItemIcon = item.icon;
+
+              return (
+                <li
+                  key={item.title}
+                  data-index={index}
+                  data-active={isActive}
+                  onMouseEnter={() => setActive(index)}
+                  className="group relative border-t border-foreground/10 py-7 last:border-b md:py-9"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute -top-px left-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-700 ease-(--ease-out) group-data-[active=true]:scale-x-100"
+                  />
+                  <div className="flex items-start gap-5 md:gap-8">
+                    <span className="mt-2 w-7 shrink-0 font-mono text-xs text-muted-foreground tabular-nums md:mt-4">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <div className="min-w-0 flex-1">
+                      <h3 className="flex items-start gap-3 text-[1.9rem] leading-[1.1] text-foreground/55 lg:text-foreground/30 transition-[color,translate,scale,rotate] duration-500 ease-(--ease-out) group-data-[active=true]:translate-x-1 group-data-[active=true]:text-foreground lg:group-data-[active=true]:text-foreground md:text-[2.6rem]">
+                        <span className="flex-1">{item.title}</span>
+                        <ArrowUpRight
+                          aria-hidden="true"
+                          className="mt-1.5 size-6 shrink-0 -translate-x-2 text-primary opacity-0 transition-[opacity,translate,scale,rotate] duration-500 ease-(--ease-out) group-data-[active=true]:translate-x-0 group-data-[active=true]:opacity-100 max-lg:hidden md:mt-3"
+                          strokeWidth={1.5}
+                        />
+                      </h3>
+
+                      <div className="mt-4 flex items-start gap-4 lg:sr-only">
+                        <span
+                          aria-hidden="true"
+                          className={cn(
+                            "grid size-10 shrink-0 place-items-center rounded-full border transition-colors duration-500",
+                            isActive
+                              ? "border-transparent bg-accent text-accent-foreground"
+                              : "border-foreground/12 text-muted-foreground",
+                          )}
+                        >
+                          <ItemIcon className="size-4" strokeWidth={1.5} />
+                        </span>
+                        <p className="text-base leading-relaxed text-muted-foreground">{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {services.map((service, index) => (
-            <article
-              key={service.title}
-              className="reveal-fade group rounded-[1.45rem] border border-border/70 bg-card/80 p-6 shadow-lg shadow-black/5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
-              style={{ animationDelay: `${Math.min(index * 70, 400)}ms` }}
-            >
-              <div className="mb-4 flex items-start justify-between gap-4">
-                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-primary/12 transition-colors duration-300 group-hover:bg-primary/18">
-                  <service.icon className="size-6 text-primary" />
-                </span>
-                <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold tracking-[0.12em] text-muted-foreground uppercase">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <h3 className="text-lg leading-snug text-foreground md:text-xl">{service.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">{service.description}</p>
-            </article>
-          ))}
-        </div>
+        <Reveal className="mt-14 flex flex-col items-start gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
+          <p className="max-w-[46ch] text-lg leading-relaxed text-muted-foreground">
+            Não encontrou exatamente o que precisa? Cada caso é avaliado individualmente.
+          </p>
+          <a
+            href="#contact"
+            className="group inline-flex h-14 items-center gap-3 rounded-full border border-foreground/15 px-7 text-base font-medium transition-[background-color,color,border-color,translate,scale,rotate] duration-300 ease-(--ease-out) hover:border-transparent hover:bg-foreground hover:text-background active:scale-[0.97]"
+          >
+            {PRIMARY_CTA}
+            <ArrowUpRight
+              className="size-4 transition-transform duration-300 ease-(--ease-out) group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              strokeWidth={1.75}
+            />
+          </a>
+        </Reveal>
       </div>
     </section>
   );
