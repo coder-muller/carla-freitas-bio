@@ -223,3 +223,34 @@
     opacity: 1;
   }
 }
+
+/* A growth wave that travels outward through the tree rings. */
+.ring-pulse {
+  opacity: 0;
+  animation: ringPulse 9s linear infinite;
+  animation-delay: calc(2.6s + var(--i, 0) * 70ms);
+}
+
+@keyframes ringPulse {
+  0% {
+    opacity: 0;
+  }
+
+  3% {
+    opacity: 0.85;
+  }
+
+  14% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-pulse {
+    animation: none;
+  }
+}
