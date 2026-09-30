@@ -142,8 +142,8 @@ function RingLayer({ ring, index, px, py }: RingLayerProps) {
 
 export function TreeRings({ years, className }: { years: number; className?: string }) {
   const rings = useMemo(() => buildRings(years), [years]);
-  const INNER = rings[0].tick;
-  const OUTER = rings[rings.length - 1].tick;
+  const inner = rings[0].tick;
+  const outer = rings[rings.length - 1].tick;
   const reduce = useReducedMotion();
   const px = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
   const py = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
@@ -179,10 +179,10 @@ export function TreeRings({ years, className }: { years: number; className?: str
       <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="size-full overflow-visible">
         <g className="fade-up" style={{ "--d": "1100ms" } as React.CSSProperties}>
           <motion.line
-            x1={INNER.x}
-            y1={INNER.y}
-            x2={OUTER.x + (OUTER.x - CENTER) * 0.14}
-            y2={OUTER.y + (OUTER.y - CENTER) * 0.14}
+            x1={inner.x}
+            y1={inner.y}
+            x2={outer.x + (outer.x - CENTER) * 0.14}
+            y2={outer.y + (outer.y - CENTER) * 0.14}
             stroke="currentColor"
             strokeOpacity={0.35}
             strokeDasharray="2 5"
@@ -196,10 +196,10 @@ export function TreeRings({ years, className }: { years: number; className?: str
         ))}
 
         <g className="fade-up font-mono" style={{ "--d": "1700ms" } as React.CSSProperties}>
-          <text x={OUTER.x + 34} y={OUTER.y - 28} fontSize={13} fill="currentColor" fillOpacity={0.75} letterSpacing="0.08em">
+          <text x={outer.x + 34} y={outer.y - 28} fontSize={13} fill="currentColor" fillOpacity={0.75} letterSpacing="0.08em">
             HOJE
           </text>
-          <text x={INNER.x + 18} y={INNER.y - 40} fontSize={13} fill="currentColor" fillOpacity={0.75} letterSpacing="0.08em">
+          <text x={inner.x + 18} y={inner.y - 40} fontSize={13} fill="currentColor" fillOpacity={0.75} letterSpacing="0.08em">
             {CONTACT.since}
           </text>
         </g>
