@@ -18,7 +18,7 @@ export const CONTACT = {
   phoneHref: "tel:+5553999297361",
   instagram: "@carla.sfreitas_26",
   instagramHref: "https://www.instagram.com/carla.sfreitas_26/",
-  crbio: "CRBio 45378-03D",
+  crbio: "CRBio 045378/03",
   since: 2004,
 };
 
